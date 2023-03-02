@@ -46,6 +46,11 @@ const guitars = {
   price : 1000,
   color: 'black'
 }
+
+//metodo- methods
+const handleClick = (message) => {
+  console.log(message);
+}
 </script>
 
 
@@ -95,6 +100,13 @@ const guitars = {
         {{ fruta.name }} - {{ fruta.price }}
     </li>
   </template>
+
+<!-- eventos  -->
+<button v-on:click.left="handleClick('click Left')"> Activame left</button>
+<button @click.middle="handleClick('Click Middle')"> Activame middle</button>
+<button @click.right.prevent="handleClick('Click Right')"> Activame right</button>
+
+
 
 </template>
 
