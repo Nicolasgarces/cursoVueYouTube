@@ -1,4 +1,7 @@
 <script setup>
+import { ref } from 'vue'; 
+
+
 const name = 'este texto irá del script al template usando {{}}';
 const styleColor = 'color: blue';
 const arrayColor = [ "Blue", "Red", "green"];
@@ -51,7 +54,17 @@ const guitars = {
 const handleClick = (message) => {
   console.log(message);
 }
+
+
+const counter = ref(0);
+
+const increment = () => {counter.value++};
+const decrement = () => {counter.value--};
+const restore = () => {( counter.value = 0)};
+
+
 </script>
+
 
 
 <template>
@@ -59,16 +72,30 @@ const handleClick = (message) => {
     
   <!-- usando la interpolacion -->
   <h1>Hola {{name.toUpperCase()}}</h1> 
+<!-- ---------------------------------------------------- -->
+
   <!-- usando el v-bind -->
   <h2 :style="styleColor"> usando el v-bind que es lo mismo que : </h2>
+<!-- ---------------------------------------------------- -->
+
+
   <!-- interpretar algo en texto -->
   <h2>{{ arrayColor }}</h2>
+<!-- ---------------------------------------------------- -->
+
+
   <!-- usando el v-bind -->
   <h2 :style="`color : ${arrayColor[2]}`">Soy verde</h2>
+<!-- ---------------------------------------------------- -->
+
+
 <!-- usando l v-if -->
     <p v-if="activo === true"><span> Estoy activo</span></p>
     <p v-else-if="activo === false"><span>Estoy inactivo</span></p>
     <p v-else><span>Estoy indeciso</span></p>
+<!-- ---------------------------------------------------- -->
+
+
     <!-- usando v-for -->
     <ul>
        <li v-for="(frutas, index) in arrayFrutas"
@@ -76,8 +103,10 @@ const handleClick = (message) => {
          {{ index }} - {{ frutas }}
        </li>
     </ul>
-
     <br>
+<!-- ---------------------------------------------------- -->
+
+
 <!-- ejemplo 2  de for-->
     <ul>
         <li v-for=" fruta in frutas" :key="fruta.name">
@@ -85,14 +114,19 @@ const handleClick = (message) => {
         </li>
     </ul>
     <br>
+<!-- ---------------------------------------------------- -->
+
+
 <!-- ejemplo 3 de for -->
     <ul>
       <li v-for="guitar, key, index in guitars"> 
       {{index}} - {{ key }} : {{ guitar }}
       </li>
     </ul>
-
     <br>
+<!-- ---------------------------------------------------- -->
+
+
 
 <!-- ejemplo 4 de for usando el v-if-->
   <template v-for="fruta in frutas2" :key="fruta.name" >
@@ -100,12 +134,26 @@ const handleClick = (message) => {
         {{ fruta.name }} - {{ fruta.price }}
     </li>
   </template>
+<!-- ---------------------------------------------------- -->
+
+  
 
 <!-- eventos  -->
 <button v-on:click.left="handleClick('click Left')"> Activame left</button>
 <button @click.middle="handleClick('Click Middle')"> Activame middle</button>
 <button @click.right.prevent="handleClick('Click Right')"> Activame right</button>
+<!-- ---------------------------------------------------- -->
 
+
+
+<!-- usando el ref() -->
+
+<h2 v-if="counter > 0" :style="'color: green'">{{counter}}</h2>
+
+<button  @click="increment">Aumentar</button>
+<button  @click="decrement">Disminuir</button>
+<button  @click="restore">Restaurar</button>
+<!-- ---------------------------------------------------- -->
 
 
 </template>
@@ -114,4 +162,14 @@ const handleClick = (message) => {
 h1{
   color:red
 }
+.postive{
+  color: green;
+}
+
+.postive{
+  color: green;
+}
+
+
+
 </style>
